@@ -10,7 +10,6 @@ public class Pocket : MonoBehaviour
         {
             coin.ToDestroyed();
             _coinsCounter++;
-            Debug.Log(_coinsCounter);
         }
     }
 }

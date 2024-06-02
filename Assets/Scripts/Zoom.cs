@@ -12,13 +12,13 @@ public class Zoom : MonoBehaviour
     private float _size;
     private Camera _camera;
 
-    void Start()
+    private void Start()
     {
         _camera = GetComponent<Camera>();
         _size = _camera.orthographicSize;
     }
 
-    void Update()
+    private void Update()
     {
         _size -= Input.GetAxis(_mouseScrollWheel) * _sensitivity;
         _camera.orthographicSize = Mathf.MoveTowards(_camera.orthographicSize, Mathf.Clamp(_size, _minValue, _maxValue), Time.deltaTime * _speed);
