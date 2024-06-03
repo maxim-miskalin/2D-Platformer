@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 5803376799440402918}
   - component: {fileID: 5592948054469941724}
   - component: {fileID: 7787807562320060826}
+  - component: {fileID: -7469157142296828849}
+  - component: {fileID: -6017073840622160529}
+  - component: {fileID: 163866270732551346}
+  - component: {fileID: 7428174375230285337}
   m_Layer: 7
   m_Name: GreenSlime
   m_TagString: Untagged
@@ -180,13 +184,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 6238168078730384357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1c122bd3d7ed7240b5223e4eb7410c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 016848f6fc9a31c45b60c64ce916d724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _wayPoint: {fileID: 0}
   _speed: 3
-  _jumpPower: 0.5
+  _jumpPower: 1.5
   _minDistantionToPoint: 0.5
-  _layerGround:
+--- !u!114 &-7469157142296828849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238168078730384357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b030b2983df7bd44cae6b8688fb03657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxValue: 25
+--- !u!114 &-6017073840622160529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238168078730384357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e3e9f493a5a2e498f4f38018ed003f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectionRadius: 4
+  _playerLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
+--- !u!114 &163866270732551346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238168078730384357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fae4ebd30be55469771bd54b0c4278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distance: 0.5
+  _frequency: 1
+--- !u!114 &7428174375230285337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6238168078730384357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc35364b61d114f418355addf9157b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: 10

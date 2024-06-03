@@ -2,12 +2,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
-public class Mover : MonoBehaviour
+public class MoverPlayer : MonoBehaviour
 {
     [SerializeField] private float _sittingSize = 0.7f;
     [SerializeField] private float _speed = 7f;
     [SerializeField] private float _jumpPower = 8f;
-    [SerializeField] private float _fallGravityScale = 2.5f;
+    [SerializeField] private float _fallGravityScale = 3f;
 
     private string _groundTag = "Ground";
     private string _horizontalInput = "Horizontal";
@@ -22,19 +22,17 @@ public class Mover : MonoBehaviour
     private float _defualtScaleY;
     private bool _isGround = false;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        _defualtGravityScale = _rigidbody.gravityScale;
-        _defualtScaleY = transform.localScale.y;
+        _spriteRenderer = GetComponent<SpriteRenderer>();        
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        SetGravity();
+        _defualtGravityScale = _rigidbody.gravityScale;
+        _defualtScaleY = transform.localScale.y;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,24 +49,37 @@ public class Mover : MonoBehaviour
 
     private void Update()
     {
+        Move();
+        Jump();
+        SitDown();
+        TurnToSide();
+        SetGravity();
+
+        _animator.SetFloat(_animationMoveX, Mathf.Abs(Input.GetAxis(_horizontalInput)));
+    }
+
+    private void Move()
+    {
         transform.Translate(new(Input.GetAxis(_horizontalInput) * _speed * Time.deltaTime, 0));
+    }
 
-        if (Input.GetButtonDown(_jumpInput) && _isGround)
+    private void Jump()
+    {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown(_jumpInput)) && _isGround)
             _rigidbody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+    }
 
+    private void SitDown()
+    {
         if (Input.GetKey(KeyCode.LeftShift))
             transform.localScale = new(transform.localScale.x, _sittingSize);
         else
             transform.localScale = new(transform.localScale.x, _defualtScaleY);
-
-        _animator.SetFloat(_animationMoveX, Mathf.Abs(Input.GetAxis(_horizontalInput)));
-
-        TurnToSide();
     }
 
     private void SetGravity()
     {
-        if (_rigidbody.velocity.y < 0 && !_isGround)
+        if ((Input.GetKey(KeyCode.S) || _rigidbody.velocity.y < 0) && !_isGround)
             _rigidbody.gravityScale = _fallGravityScale;
         else
             _rigidbody.gravityScale = _defualtGravityScale;

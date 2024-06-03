@@ -8,7 +8,14 @@ public class Follow : MonoBehaviour
 
     private void Update()
     {
+        if (_playerTarget != null)
+        {
         Vector3 desiredPosition = _playerTarget.position - _offset;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, -_offset, _smoothSpeed * Time.deltaTime);
+        }
     }
 }
