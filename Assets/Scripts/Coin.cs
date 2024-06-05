@@ -9,6 +9,6 @@ public class Coin : MonoBehaviour
     public void ToDestroyed()
     {
         Disappear?.Invoke();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

@@ -1,22 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(TargetDetection), typeof(Damage))]
+[RequireComponent(typeof(TargetDetection))]
 public class AttakSlime : MonoBehaviour
 {
     [SerializeField] private float _distance = 0.5f;
     [SerializeField] private float _frequency = 1f;
+    [SerializeField, Min(0)] private float _damage;
 
     private TargetDetection _targetDetection;
     private Transform _target;
-    private Damage _damage;
     private WaitForSeconds _wait;
     private Coroutine _coroutine;
 
     private void Awake()
     {
         _targetDetection = GetComponent<TargetDetection>();
-        _damage = GetComponent<Damage>();
     }
 
     private void OnEnable()
@@ -60,7 +59,7 @@ public class AttakSlime : MonoBehaviour
             while (health.CurrentValue > 0)
             {
                 if (Vector2.Distance(transform.position, _target.position) <= _distance)
-                    _damage.ReduceHealth(health);
+                    health.TakeDamage(_damage);
 
                 yield return _wait;
             }

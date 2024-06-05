@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Follow : MonoBehaviour
+public class Follower : MonoBehaviour
 {
     [SerializeField] private Transform _playerTarget;
     [SerializeField] private float _smoothSpeed = 5f;
@@ -10,8 +10,8 @@ public class Follow : MonoBehaviour
     {
         if (_playerTarget != null)
         {
-        Vector3 desiredPosition = _playerTarget.position - _offset;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
+            Vector3 desiredPosition = _playerTarget.position - _offset;
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, _smoothSpeed * Time.deltaTime);
         }
         else
         {

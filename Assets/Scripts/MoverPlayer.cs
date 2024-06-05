@@ -20,19 +20,28 @@ public class MoverPlayer : MonoBehaviour
 
     private float _defualtGravityScale;
     private float _defualtScaleY;
+    private bool _isJump = false;
     private bool _isGround = false;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
         _defualtGravityScale = _rigidbody.gravityScale;
         _defualtScaleY = transform.localScale.y;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isJump)
+            Jump();
+
+        SetGravity();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -50,10 +59,11 @@ public class MoverPlayer : MonoBehaviour
     private void Update()
     {
         Move();
-        Jump();
         SitDown();
         TurnToSide();
-        SetGravity();
+
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown(_jumpInput)) && _isGround)
+            _isJump = true;
 
         _animator.SetFloat(_animationMoveX, Mathf.Abs(Input.GetAxis(_horizontalInput)));
     }
@@ -65,8 +75,8 @@ public class MoverPlayer : MonoBehaviour
 
     private void Jump()
     {
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown(_jumpInput)) && _isGround)
-            _rigidbody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+        _rigidbody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
+        _isJump = false;
     }
 
     private void SitDown()

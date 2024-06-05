@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7469157142296828849}
   - component: {fileID: -6017073840622160529}
   - component: {fileID: 163866270732551346}
-  - component: {fileID: 7428174375230285337}
+  - component: {fileID: -4728346778320906940}
   m_Layer: 7
   m_Name: GreenSlime
   m_TagString: Untagged
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 25
+  _currentValue: 0
 --- !u!114 &-6017073840622160529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distance: 0.5
   _frequency: 1
---- !u!114 &7428174375230285337
+  _damage: 10
+--- !u!114 &-4728346778320906940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +245,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6238168078730384357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc35364b61d114f418355addf9157b55, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c42a660fd7dab24eaf80616d3c851d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _value: 10
+  _delayOfDisappearance: 5

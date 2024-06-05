@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7455650548446663473}
   - component: {fileID: 1702061004373869689}
   - component: {fileID: 1938424832802904056}
-  - component: {fileID: 4972409102866588841}
+  - component: {fileID: -7203198267717047017}
   m_Layer: 7
   m_Name: OrangeSlime
   m_TagString: Untagged
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 40
+  _currentValue: 0
 --- !u!114 &1702061004373869689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distance: 0.5
   _frequency: 1
---- !u!114 &4972409102866588841
+  _damage: 15
+--- !u!114 &-7203198267717047017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +245,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7786198711322897236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc35364b61d114f418355addf9157b55, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c42a660fd7dab24eaf80616d3c851d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _value: 15
+  _delayOfDisappearance: 5

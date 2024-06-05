@@ -1,48 +1,35 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Damage))]
 public class AttakPlayer : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _distance = 10f;
+    [SerializeField, Min(0)] private float _damage;
 
-    private Damage _damage;
     private Vector2 _mousePosition;
 
-    private void Awake()
-    {
-        _damage = GetComponent<Damage>();
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         _mousePosition = Input.mousePosition;
 
         if (Input.GetMouseButtonDown(0))
         {
-            Health health = HitTarget();
+            Health health = FindTarget();
 
             if (health != null)
             {
-                _damage.ReduceHealth(health);
+                health.TakeDamage(_damage);
             }
         }
     }
 
-    private Health HitTarget()
+    private Health FindTarget()
     {
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, _mousePosition, _distance, _enemyLayer);
 
-        if (raycastHit.collider != null)
-        {
-            if (raycastHit.collider.TryGetComponent(out Health health))
-                return health;
-            else
-                return null;
-        }
-        else
-        {
-            return null;
-        }
+        if (raycastHit.collider != null && raycastHit.collider.TryGetComponent(out Health health))
+            return health;
+
+        return null;
     }
 }

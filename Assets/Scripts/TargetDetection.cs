@@ -21,6 +21,7 @@ public class TargetDetection : MonoBehaviour
             if (target != _target)
             {
                 _target = target;
+
                 if (target.TryGetComponent(out MoverPlayer player))
                     Locate?.Invoke(target);
             }
@@ -34,17 +35,12 @@ public class TargetDetection : MonoBehaviour
 
     private bool CheckForHealth(Collider2D target)
     {
-        if (target != null)
+        if (target != null && target.TryGetComponent(out Health health))
         {
-            if (target.TryGetComponent(out Health health))
-            {
-                if (health.CurrentValue > 0) return true;
-                else return false;
-            }
+            if (health.CurrentValue > 0)
+                return true;
             else
-            {
                 return false;
-            }
         }
         else
         {

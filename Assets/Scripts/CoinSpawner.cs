@@ -6,7 +6,6 @@ public class CoinSpawner : MonoBehaviour
     [SerializeField] private Coin _prefabCoin;
     [SerializeField] private float _spawnTime = 5f;
 
-    private Coin _coin;
     private WaitForSeconds _wait;
 
     private void Start()
@@ -18,10 +17,8 @@ public class CoinSpawner : MonoBehaviour
         _wait = new(_spawnTime);
     }
 
-    private void DestroyCoin()
+    private void CreateNewCoin()
     {
-        _coin.Disappear -= DestroyCoin;
-        Destroy(_coin.gameObject);
         StartCoroutine(CreateCoin());
     }
 
@@ -29,7 +26,7 @@ public class CoinSpawner : MonoBehaviour
     {
         yield return _wait;
 
-        _coin = Instantiate(_prefabCoin, transform);
-        _coin.Disappear += DestroyCoin;
+        Coin coin = Instantiate(_prefabCoin, transform);
+        coin.Disappear += CreateNewCoin;
     }
 }
