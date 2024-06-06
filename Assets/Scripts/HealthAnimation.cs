@@ -35,12 +35,12 @@ public class HealthAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.ChangeValue += CheckHealth;
+        _health.ÑhangedValue += CheckHealth;
     }
 
     private void OnDisable()
     {
-        _health.ChangeValue -= CheckHealth;
+        _health.ÑhangedValue -= CheckHealth;
     }
 
     private void Start()

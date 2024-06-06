@@ -37,6 +37,8 @@ public class MoverSlime : MonoBehaviour
     {
         for (int i = 0; i < _wayPoint.childCount; i++)
             _way.Add(_wayPoint.GetChild(i));
+
+        MovingTowardsGoal(null);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

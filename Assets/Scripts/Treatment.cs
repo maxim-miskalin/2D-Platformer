@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Health))]
-public class Heart : MonoBehaviour
+[RequireComponent(typeof(Health))]
+public class Treatment : MonoBehaviour
 {
     private Health _health;
 

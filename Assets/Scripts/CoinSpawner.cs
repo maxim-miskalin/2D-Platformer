@@ -17,8 +17,9 @@ public class CoinSpawner : MonoBehaviour
         _wait = new(_spawnTime);
     }
 
-    private void CreateNewCoin()
+    private void CreateNewCoin(Coin coin)
     {
+        coin.Disappear -= CreateNewCoin;
         StartCoroutine(CreateCoin());
     }
 

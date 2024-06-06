@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class MoverPlayer : MonoBehaviour
 {
+    public event Action Attacked;
+
     [SerializeField] private float _sittingSize = 0.7f;
     [SerializeField] private float _speed = 7f;
     [SerializeField] private float _jumpPower = 8f;
@@ -25,9 +28,9 @@ public class MoverPlayer : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -64,6 +67,9 @@ public class MoverPlayer : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown(_jumpInput)) && _isGround)
             _isJump = true;
+
+        if (Input.GetMouseButtonDown(0))
+            Attacked?.Invoke();
 
         _animator.SetFloat(_animationMoveX, Mathf.Abs(Input.GetAxis(_horizontalInput)));
     }

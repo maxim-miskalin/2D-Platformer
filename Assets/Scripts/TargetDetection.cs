@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class TargetDetection : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class TargetDetection : MonoBehaviour
 
     private Collider2D _target;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Collider2D target = Physics2D.OverlapCircle(transform.position, _detectionRadius, _playerLayer);
 
@@ -37,10 +36,7 @@ public class TargetDetection : MonoBehaviour
     {
         if (target != null && target.TryGetComponent(out Health health))
         {
-            if (health.CurrentValue > 0)
-                return true;
-            else
-                return false;
+            return health.CurrentValue > 0;
         }
         else
         {

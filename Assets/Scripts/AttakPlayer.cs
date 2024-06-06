@@ -1,25 +1,42 @@
 using UnityEngine;
 
+[RequireComponent(typeof(MoverPlayer))]
 public class AttakPlayer : MonoBehaviour
 {
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private float _distance = 10f;
     [SerializeField, Min(0)] private float _damage;
 
+    private MoverPlayer _player;
     private Vector2 _mousePosition;
+
+    private void Awake()
+    {
+        _player = GetComponent<MoverPlayer>();
+    }
+
+    private void OnEnable()
+    {
+        _player.Attacked += Attack;
+    }
+
+    private void OnDisable()
+    {
+        _player.Attacked -= Attack;
+    }
 
     private void Update()
     {
         _mousePosition = Input.mousePosition;
+    }
 
-        if (Input.GetMouseButtonDown(0))
+    private void Attack()
+    {
+        Health health = FindTarget();
+
+        if (health != null)
         {
-            Health health = FindTarget();
-
-            if (health != null)
-            {
-                health.TakeDamage(_damage);
-            }
+            health.TakeDamage(_damage);
         }
     }
 

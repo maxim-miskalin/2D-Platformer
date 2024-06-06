@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public event Action ChangeValue;
-
     [SerializeField, Min(0)] private float _maxValue;
     [SerializeField] private float _currentValue;
 
     public float CurrentValue => _currentValue;
+
+    public event Action ÑhangedValue;
 
     private void Awake()
     {
@@ -18,18 +18,14 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         _currentValue -= damage;
+        _currentValue = Math.Clamp(_currentValue, 0, _maxValue);
 
-        if (_currentValue < 0)
-            _currentValue = 0;
-
-        ChangeValue?.Invoke();
+        ÑhangedValue?.Invoke();
     }
 
     public void RestoreHealth(float health)
     {
         _currentValue += health;
-
-        if(_currentValue > _maxValue)
-            _currentValue = _maxValue;
+        _currentValue = Math.Clamp(_currentValue, 0, _maxValue);
     }
 }
